@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script type="text/javascript" src="includes/fitChecker.js"></script>
+		<script type="text/javascript" src="includes/commonApi.js"></script>
+		<script type="text/javascript">
+		$(window).load(function(){
+			fitChecker.init();
+		});
+
+		function bg_trackGAevent(name, value) {
+			trackGAevent(name, value);
+		}
+		opera.extension.bg_trackGAevent = bg_trackGAevent;
+		function save(data) {
+			return fitChecker.save(data);
+		}
+		opera.extension.save = save;
+		</script>
+		<script type="text/javascript">
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.src = 'https://ssl.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	   </script>
+	   <script type="text/javascript">
+	   try {
+			var pageTracker = _gat._getTracker("UA-325731-18");
+			pageTracker._trackPageview();
+			pageTracker._trackEvent('steklmar', 'request-opera-beta-test');
+		} catch(err) {
+			alert(err);
+		}
+		</script>
+	</head>
+	<body></body>
+</html>

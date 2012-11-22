@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+	<title>FIT Checker - Nastavení</title>
+	<link rel="shortcut icon" href="icons/icon-16.png">
+	<link rel="stylesheet" href="css/options.css" type="text/css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="includes/fitChecker.js"></script>
+	<script type="text/javascript">
+	$(window).load(function() {
+		fitChecker.loadUserData();
+
+		var form = document.forms[0];
+		form.login.value = fitChecker.login;
+		form.password.value = fitChecker.password;
+		if (fitChecker.ga == 'yes') {
+			$('#ga_yes').attr('checked', true);
+		} else {
+			$('#ga_no').attr('checked', true);
+		}
+
+		// načte a označí i vybrané
+		fitChecker.loadSubjectsFromEdux();
+	});
+
+	function save() {
+		var form = document.forms[0];
+		var login = form.login.value;
+		if (!login) {
+			messages.setError('Zadej Login.');
+			return;
+		}
+		var password = form.password.value;
+		if (!password) {
+			messages.setError('Zadej Heslo.');
+			return;
+		}
+
+		var subjects = [];
+		$('input[type="checkbox"]:checked').each(function() {
+			subjects.push($(this).attr("id"));
+		});
+
+		var data = {
+			login : login,
+			password : password,
+			subjects : subjects,
+			ga : ($('#ga_yes').attr('checked')) ? 'yes' : 'no',
+		};
+
+		if (opera.extension.bgProcess.save(data)) {
+			messages.setNotice('Uloženo.');
+		} else {
+			messages.setNotice('Ukládání selhalo.');
+		}
+	}
+    </script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="inner">
+			<div class="title">
+				<img src="icons/icon-128.png" alt="logo" />
+			</div>
+			<div id="messages"></div>
+			<div class="title">Edux účet</div>
+			<form>
+				<dl>
+					<dt>Login:</dt>
+					<dd><input name="login" type="text" /></dd>
+					<dt>Heslo:</dt>
+					<dd><input type="password" name="password" /></dd>
+				</dl>
+
+				<div class="title opt">Možnosti</div>
+
+				<fieldset>
+					<legend>Předměty</legend>
+				</fieldset>
+
+				<p>
+					Odesílat informace pro Google Analytics:<br />
+					<input type="radio" name="ga" id="ga_yes" checked />
+					<label for="ga_yes">Ano - odesílán je jen login (bez hesla) a běžné informace pro Google Analytics.</label><br />
+					<input type="radio" name="ga" id="ga_no" />
+					<label for="ga_no">Ne - neodesílá se vůbec nic.</label>
+				</p>
+			</form>
+			<div class="button-save">
+				<button onclick="save();">Save</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

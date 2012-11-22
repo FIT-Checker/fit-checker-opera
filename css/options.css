@@ -1,0 +1,91 @@
+/**
+ * Obsahuje styly pro stránku s nastaveními.
+ *
+ * @author Martin Štekl <martin.stekl@gmail.com>
+ */
+
+body {
+	font-family: Arial, sans-serif;
+	font-size: smaller;
+}
+
+dl {
+	text-align: center;
+}
+
+dt, dd {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+dt {
+	text-align: right;
+	float: left;
+	display: inline-block;
+	padding-right: 0.5em;
+	width: 40%;
+}
+
+table {
+	margin: 0 auto;
+}
+
+tr, td {
+	border: none;
+	margin: 0;
+	padding: 0
+}
+
+td {
+	padding-right: 1.2em;
+}
+
+#wrapper {
+	width: 800px;
+	margin: 30px auto 0;
+	padding: 3px;
+	border: 1px solid #c3d9ff;
+}
+
+#inner {
+	padding: 15px;
+	background-color:#e8eefa;
+}
+
+#messages {
+	display: none;
+}
+
+#messages p {
+	margin: 0 0 10px;
+	padding: 7px 0 7px 25px;
+}
+
+#messages .notice {
+	border: 1px solid green;
+	background: #90ee90 url('../icons/ok.png') 7px no-repeat;
+}
+
+#messages .error {
+	border: 1px solid red;
+	background: #ffc0cb url('../icons/error.png') 7px no-repeat;
+}
+
+
+.button-save {
+	margin-top: 8px;
+	text-align: center;
+}
+
+.title {
+	margin-bottom: 8px;
+	font-size: medium;
+	font-weight: bold;
+	text-align: center;
+}
+
+.title.opt{
+	margin-top: 18px;
+}
